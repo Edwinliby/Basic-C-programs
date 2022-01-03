@@ -1,25 +1,27 @@
 #include <stdio.h>
- 
-#define MAX 50
+#include<stdlib.h>
  
 void insert();
 void delete();
 void display();
-int queue_array[MAX];
-int rear = - 1;
-int front = - 1;
-main()
+int queue[50];
+int rear = - 1, front = - 1;
+int i, n;
+
+int main()
 {
-    int choice;
-    while (1)
+    int ch,choice = 0;
+    printf("Enter the max array size: ");
+    scanf("%d",&n);
+    while (choice != 4)
     {
-        printf("1.Insert element to queue \n");
-        printf("2.Delete element from queue \n");
-        printf("3.Display all elements of queue \n");
-        printf("4.Quit \n");
-        printf("Enter your choice : ");
-        scanf("%d", &choice);
-        switch (choice)
+        printf("\n1.Insert element to queue");
+        printf("\n2.Delete element from queue");
+        printf("\n3.Display all elements of queue");
+        printf("\n4.Quit");
+        printf("\nEnter your choice : ");
+        scanf("%d", &ch);
+        switch (ch)
         {
             case 1:
             insert();
@@ -41,16 +43,16 @@ main()
 void insert()
 {
     int add_item;
-    if (rear == MAX - 1)
-    printf("Queue Overflow \n");
+    if (rear == n - 1)
+    printf("\nQueue Overflow !!");
     else
     {
         if (front == - 1)
         front = 0;
-        printf("Inset the element in queue : ");
+        printf("\nInset the element in queue : ");
         scanf("%d", &add_item);
         rear = rear + 1;
-        queue_array[rear] = add_item;
+        queue[rear] = add_item;
     }
 }
  
@@ -63,21 +65,20 @@ void delete()
     }
     else
     {
-        printf("Element deleted from queue is : %d\n", queue_array[front]);
+        printf("Element deleted from queue is : %d\n", queue[front]);
         front = front + 1;
     }
 }
  
 void display()
 {
-    int i;
     if (front == - 1)
         printf("Queue is empty \n");
     else
     {
         printf("Queue is : \n");
         for (i = front; i <= rear; i++)
-            printf("%d ", queue_array[i]);
+            printf("%d ", queue[i]);
         printf("\n");
     }
 }
