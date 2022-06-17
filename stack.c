@@ -53,7 +53,7 @@ int main()
 int push()
 {
  int item;
- if(top == n )
+ if(top == n-1 )
    printf("\nOverflow\n");
  else
   {
@@ -81,12 +81,16 @@ int pop()
 int display()
 {
  int i;
+ if(top==-1)
+  printf("\nUnderflow\n");
+ else
+ {
  for(i=top;i>=0;i--)
  {
   printf("%d",a[i]);
   printf(" ");
  }
 }
-
+}
   
   

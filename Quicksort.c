@@ -20,7 +20,7 @@ int partition(int a[],int first,int last)
         }
         if( a[loc] > a[last] )
         {
-            swap(a[loc], a[last]);
+            swap(loc, last);
             loc = last;
             first = first + 1;
         }
@@ -30,7 +30,7 @@ int partition(int a[],int first,int last)
         }
         if( a[loc] < a[first] )
         {
-            swap(a[loc], a[first]);
+            swap(loc, first);
             loc = first;
             last = last - 1;
         }

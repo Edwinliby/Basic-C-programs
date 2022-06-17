@@ -43,14 +43,14 @@ int main()
 void insert()
 {
     int add_item;
+    printf("\nInset the element in queue : ");
+    scanf("%d", &add_item);
     if (rear == n - 1)
     printf("\nQueue Overflow !!");
     else
     {
         if (front == - 1)
         front = 0;
-        printf("\nInset the element in queue : ");
-        scanf("%d", &add_item);
         rear = rear + 1;
         queue[rear] = add_item;
     }
@@ -58,16 +58,19 @@ void insert()
  
 void delete()
 {
-    if (front == - 1 || front > rear)
-    {
-        printf("Queue Underflow \n");
-        return ;
-    }
-    else
-    {
-        printf("Element deleted from queue is : %d\n", queue[front]);
-        front = front + 1;
-    }
+    int item;
+    if(front == -1)
+		printf("\nUnderflow !!\n");
+	else if(front == rear)
+	{
+		item = queue[front];
+		front =-1, rear = -1;
+	}
+	else
+	{
+		item = queue[front];
+		front++;
+	}
 }
  
 void display()

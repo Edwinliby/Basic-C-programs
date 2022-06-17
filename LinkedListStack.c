@@ -30,6 +30,8 @@ void push()
 {
     int data;
     struct node *temp = malloc(sizeof(struct node));
+    for(int i=0;i<n;i++)
+    {
     if(temp == NULL )
         printf("Unable to push");
     else
@@ -48,6 +50,7 @@ void push()
             temp->link = ptr;
             ptr = temp;
         }
+    }
     }
 }
 
@@ -68,6 +71,8 @@ void pop()
 int main()
 {
     int ch;
+    printf("Enter the limit:");
+    scanf("%d",&n);
     while(ch != 4) 
     {
         printf("\n1. Display list\n");

@@ -11,15 +11,14 @@ struct node* start = NULL;
 void traverse()
 {
     struct node* temp;
- 
     if (start == NULL)
         printf("\nList is empty\n");
- 
-    else {
+    else 
+    {
         temp = start;
-        while (temp != NULL) {
-            printf("Data = %d\n",
-                   temp->data);
+        while (temp != NULL) 
+        {
+            printf("Data = %d\n",temp->data);
             temp = temp->link;
         }
     }

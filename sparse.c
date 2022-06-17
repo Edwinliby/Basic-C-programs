@@ -1,12 +1,12 @@
 #include<stdio.h>
 
 int A[50][50], B[50][50], b[50][50] = {0}, t[50][50] = {0};
-int i, j, r, c;
+int i, j, r, c,s1,s2;
 int n, sr, s;
 
-int spar(int r, int c, int a[50][50]);
-int input(int r, int c, int a[50][50]);
-int display(int sr);
+int spar(int a[50][50]);
+int input(int a[50][50]);
+int display();
 int add(int p[50][50], int q[50][50]);
 
 int main()
@@ -16,23 +16,23 @@ int main()
 	printf("Enter no.of columns : ");
 	scanf("%d",&c);
 
-	printf("\nEnter the first matrix :");
-	input(r,c,A);
-	spar(r,c,A);
-	display(sr);
+	printf("\nEnter the first matris :");
+	input(A);
+	spar(A);
+	display();
 
-	printf("\nEnter the second matrix :");
-	input(r,c,B);
-	spar(r,c,B);
-	display(sr);
+	printf("\nEnter the second matris :");
+	input(B);
+	spar(B);
+	display();
 
-	printf("\nSum of two sparse matrix :");
+	printf("\nSum of two sparse matris :");
 	add(A,B);
-	spar(r,c,t);
-	display(sr);
+	spar(t);
+	display();
 }
 
-int input(int r, int c, int a[50][50])
+int input(int a[50][50])
 {	
 	n = 0;
 	for(i=0;i<r;i++)
@@ -48,7 +48,7 @@ int input(int r, int c, int a[50][50])
 	sr = n;
 }
 
-int spar(int r, int c, int a[50][50])
+int spar(int a[50][50])
 {
 	b[0][0] = r;
 	b[0][1] = c;
@@ -69,9 +69,9 @@ int spar(int r, int c, int a[50][50])
 	}
 }
 
-int display(int sr)
+int display()
 {
-	printf("\nsparse matrix :- \n");
+	printf("\nSparse matris :- \n");
 	for(i=0; i<=sr; i++)
     {
 		printf("\n");
@@ -85,15 +85,80 @@ int display(int sr)
 
 int add(int p[50][50], int q[50][50])
 {
-	n=0;
-	for(i=0;i<r;i++)
+	sr=0;
+	for(i=0; i<r ;i++)
 	{
-		for(j=0;j<c;j++)
+	 	for(j=0; j<c ;j++)
 		{
-			t[i][j] = p[i][j] + q[i][j];
-			if( t[i][j] != 0)
-				n++;		
+			if(p[i][j] != 0 || q[i][j] != 0)
+				sr++;
 		}
 	}
-	sr=n;
+
+	s1=p[0][2];
+	s2=q[0][2];
+	i=j=s=0;
+
+	while(i<=s1 && j<=s2)
+    {   
+	if(p[i][0] < q[j][0])      
+	{       
+		t[s][0] = p[i][0];      
+		t[s][1] = p[i][1];       
+		t[s][2] = p[i][2];       
+		s++;         
+		i++;      
+	}   
+	else if(q[j][0] < p[i][0])      
+	{	       
+		t[s][0]=q[j][0];          
+		t[s][1]=q[j][1];          
+		t[s][2]=q[j][2];
+    	s++; 
+		j++;
+	}
+	else if(p[i][1]<q[j][1])      
+	{    
+		t[s][0]=p[i][0];  
+		t[s][1]=p[i][1]; 
+		t[s][2]=p[i][2];  
+		s++; 
+		i++;
+    }
+	else if(q[j][1]<p[i][1])      
+	{ 
+		t[s][0]=q[j][0]; 
+		t[s][1]=q[j][1];  
+		t[s][2]=q[j][2];   
+		s++;   
+		j++;
+	}  
+	else
+	{   
+		t[s][0]=p[i][0];       
+		t[s][1]=p[i][1];  
+		t[s][2]=p[i][2]+q[j][2];  
+		s++;    
+		i++;       
+		j++;   
+		}
+    }
+	while(i<=s1)       
+	{   
+		t[s][0]=p[i][0];   
+		t[s][1]=p[i][1];   
+		t[s][2]=p[i][2];    
+		i++;    
+		s++;
+    }
+	while(j <= s2)  
+    { 
+		t[s][0]=q[j][0]; 
+		t[s][1]=p[j][1];    
+		t[s][2]=p[j][2]; 
+		j++;
+		s++;
+    }
+   
+t[0][2]=s-1;     
 }
